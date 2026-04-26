@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-serif-accent: "Parisienne", cursive;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-pure-white: #FFFFFF;
+  --color-pure-black: #000000;
+  --color-stone: #121212;
+  --color-soft-gray: #F8F8F8;
+  --color-medium-gray: #777777;
+}
+
+@layer base {
+  body {
+    @apply bg-pure-white text-pure-black font-sans antialiased selection:bg-pure-black selection:text-pure-white overflow-x-hidden;
+  }
+}
+
+.luxury-gradient {
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.95));
+}
+
+.editorial-line {
+  @apply h-px w-full bg-pure-black/10 origin-left;
+}
+
+/* Custom transitions for smooth feel */
+.smooth-reveal {
+  @apply transition-all duration-1000 ease-out;
+}
+
+.wedding-script {
+  font-family: "Great Vibes", cursive;
+  letter-spacing: 0.08em;
+}
