@@ -232,9 +232,26 @@ export default function App() {
     }
 
     audio.play().catch(() => {
-      // Autoplay may be blocked until user interaction.
-      setIsMuted(true);
+      // Autoplay can be blocked by browser policy; retry on first interaction.
     });
+  }, [isMuted]);
+
+  useEffect(() => {
+    if (isMuted) return;
+
+    const tryResumeAudio = () => {
+      const audio = audioRef.current;
+      if (!audio || !audio.paused) return;
+      audio.play().catch(() => {});
+    };
+
+    window.addEventListener('pointerdown', tryResumeAudio, { once: true });
+    window.addEventListener('keydown', tryResumeAudio, { once: true });
+
+    return () => {
+      window.removeEventListener('pointerdown', tryResumeAudio);
+      window.removeEventListener('keydown', tryResumeAudio);
+    };
   }, [isMuted]);
 
   const handleAudioToggle = async () => {
