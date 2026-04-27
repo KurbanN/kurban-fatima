@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
-  Calendar, 
   MapPin, 
   Clock, 
   Camera, 
@@ -73,6 +72,73 @@ const CountdownItem = ({ value, label }: { value: number, label: string }) => (
   <div className="flex flex-col items-center px-3 md:px-6">
     <span className="text-3xl md:text-6xl font-serif text-pure-white font-light tracking-tighter">{value.toString().padStart(2, '0')}</span>
     <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-pure-white/80 mt-2 font-bold">{label}</span>
+  </div>
+);
+
+const calendarWeekdays = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+const calendarDays = [
+  { day: 27, muted: true },
+  { day: 28, muted: true },
+  { day: 29, muted: true },
+  { day: 30, muted: true },
+  { day: 31, muted: true },
+  { day: 1 },
+  { day: 2 },
+  { day: 3, highlighted: true },
+  { day: 4 },
+  { day: 5 },
+  { day: 6 },
+  { day: 7 },
+  { day: 8 },
+  { day: 9 },
+  { day: 10 },
+  { day: 11 },
+  { day: 12 },
+  { day: 13 },
+  { day: 14 },
+  { day: 15 },
+  { day: 16 },
+  { day: 17 },
+  { day: 18 },
+  { day: 19 },
+  { day: 20 },
+  { day: 21 },
+  { day: 22 },
+  { day: 23 },
+  { day: 24 },
+  { day: 25 },
+  { day: 26 },
+  { day: 27 },
+  { day: 28 },
+  { day: 29 },
+  { day: 30 },
+  { day: 31 },
+];
+
+const WeddingCalendar = () => (
+  <div className="w-full max-w-[330px] mx-auto rounded-[1.5rem] border border-pure-black/25 px-3 py-3 md:px-4 md:py-4">
+    <div className="flex items-center justify-between px-2">
+      <p className="font-serif italic text-[1.55rem] leading-none text-pure-black normal-case md:text-[1.95rem]">август</p>
+      <p className="font-sans text-xl font-light tracking-[0.08em] text-pure-black/75 md:text-3xl">2026</p>
+    </div>
+
+    <div className="mt-2.5 grid grid-cols-7 rounded-full border border-pure-black/15 bg-pure-black px-1.5 py-1 text-center text-[10px] uppercase tracking-[0.08em] text-pure-white md:text-xs">
+      {calendarWeekdays.map((day) => (
+        <span key={day}>{day}</span>
+      ))}
+    </div>
+
+    <div className="mt-2.5 grid grid-cols-7 gap-y-0.5 px-1 text-center font-sans text-lg text-pure-black md:text-xl">
+      {calendarDays.map((item, idx) => (
+        <div key={`${item.day}-${idx}`} className={cn('flex items-center justify-center h-8 md:h-9', item.muted && 'text-pure-black/25')}>
+          {item.highlighted ? (
+            <span className="calendar-highlight flex items-center justify-center">{item.day}</span>
+          ) : (
+            <span>{item.day}</span>
+          )}
+        </div>
+      ))}
+    </div>
   </div>
 );
 
@@ -309,12 +375,12 @@ export default function App() {
           className="space-y-8 md:space-y-12"
         >
           <span className="text-pure-black/30 text-[10px] md:text-xs font-bold tracking-[0.4em] md:tracking-[0.6em]">EST. 2026</span>
-          <h2 className="text-4xl md:text-8xl font-serif text-pure-black leading-tight md:leading-[1.1] font-extralight tracking-tighter">
-            "САМЫЕ ВАЖНЫЕ МОМЕНТЫ <br className="hidden md:block" /> ХОЧЕТСЯ РАЗДЕЛИТЬ С БЛИЗКИМИ."
+          <h2 className="text-4xl md:text-7xl font-serif text-pure-black leading-tight md:leading-[1.1] font-extralight tracking-tighter">
+            ДОРОГИЕ РОДНЫЕ И ДРУЗЬЯ
           </h2>
           <div className="h-px w-24 md:w-32 bg-pure-black mx-auto" />
           <p className="text-pure-black/70 leading-[1.8] md:leading-[2.3] text-lg md:text-2xl font-sans normal-case tracking-[0.08em] max-w-3xl mx-auto">
-           Приглашаем вас разделить с нами один из самых важных и счастливых дней нашей жизни.
+            С большим счастьем приглашаем вас разделить с нами самый важный день нашей жизни — день нашей свадьбы.
           </p>
         </motion.div>
       </section>
@@ -332,51 +398,73 @@ export default function App() {
         <div className="relative z-10 max-w-6xl mx-auto">
           <SectionTitle subtitle="ДЕТАЛИ">ГДЕ И КОГДА</SectionTitle>
           
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-5 md:left-6 top-6 bottom-6 w-px bg-pure-black/15" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-xl mx-auto border border-pure-black/10 p-8 md:p-12 text-center"
+          >
+            <div className="mx-auto mb-4 w-12 h-12 rounded-full bg-pure-white border border-pure-black/15 flex items-center justify-center shadow-sm">
+              <MapPin className="w-5 h-5 text-pure-black/70" />
+            </div>
+            <p className="font-sans text-[11px] md:text-xs font-semibold tracking-[0.25em] text-pure-black/60 mb-4">ЛОКАЦИЯ</p>
+            <p className="text-pure-black font-serif text-3xl md:text-4xl italic">РЕСТОРАН RIO</p>
+            <p className="text-pure-black/55 text-xs md:text-sm tracking-[0.2em] font-semibold mt-3">ТАРАЗ, КАЗАХСТАН</p>
+            <a
+              href="https://2gis.kz/taraz/firm/70000001051255903"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block mt-6 rounded-full bg-pure-black text-pure-white px-7 py-2.5 text-[11px] tracking-[0.2em] font-semibold hover:bg-stone transition-colors"
+            >
+              2GIS
+            </a>
+          </motion.div>
 
-            {[
-              {
-                icon: Calendar,
-                title: 'ДАТА И ВРЕМЯ',
-                main: '03 АВГУСТА 2026',
-                sub: 'НАЧАЛО В 18:00',
-              },
-              {
-                icon: MapPin,
-                title: 'ЛОКАЦИЯ',
-                main: 'РЕСТОРАН RIO',
-                sub: 'ТАРАЗ, КАЗАХСТАН',
-                href: 'https://2gis.kz/taraz/firm/70000001051255903',
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative pl-14 md:pl-16 pb-10 md:pb-12 last:pb-0"
-              >
-                <div className="absolute left-0 top-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-pure-white border border-pure-black/15 flex items-center justify-center shadow-sm">
-                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-pure-black/70" />
-                </div>
-                <p className="font-sans text-[11px] md:text-xs font-semibold tracking-[0.22em] text-pure-black/60 mb-3">{item.title}</p>
-                <p className="text-pure-black font-serif text-2xl md:text-3xl italic">{item.main}</p>
-                <p className="text-pure-black/50 text-xs tracking-[0.18em] font-semibold mt-2">{item.sub}</p>
-                {item.href && (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-block mt-3 text-[10px] tracking-[0.2em] font-semibold text-pure-black/60 hover:text-pure-black underline underline-offset-4"
-                  >
-                    ОТКРЫТЬ НА КАРТЕ
-                  </a>
-                )}
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-12 md:mt-16 text-center"
+          >
+            <WeddingCalendar />
+            <p className="mt-5 font-sans font-bold text-2xl md:text-4xl tracking-[0.2em] uppercase text-pure-black/75">Начало 18:00</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 4. Evening Program */}
+      <section className="py-20 px-6 md:py-28 w-full max-w-4xl mx-auto">
+        <SectionTitle subtitle="TIMING" titleClassName="text-3xl md:text-5xl">ПРОГРАММА ВЕЧЕРА</SectionTitle>
+
+        <div className="relative max-w-4xl mx-auto">
+          <div className="absolute left-1/2 top-1 bottom-1 w-px bg-pure-black/20 -translate-x-1/2" />
+          {[
+            { time: '17:30', label: 'СБОР ГОСТЕЙ' },
+            { time: '18:00', label: 'НАЧАЛО ТОРЖЕСТВА' },
+            { time: '19:00', label: 'БАНКЕТ' },
+            { time: '21:00', label: 'ТОРТ И ТАНЦЫ' },
+          ].map((item, index) => (
+            <motion.div
+              key={item.time}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="relative pb-8 last:pb-0 grid grid-cols-2 gap-4 md:gap-10"
+            >
+              <div className={cn(
+                'absolute top-1 w-6 h-6 rounded-full bg-pure-white border border-pure-black/25 flex items-center justify-center',
+                'left-1/2 -translate-x-1/2',
+              )}>
+                <Clock className="w-3.5 h-3.5 text-pure-black/65" />
+              </div>
+              <div className={cn(index % 2 === 0 ? 'text-right pr-6 md:pr-12' : 'col-start-2 pl-6 md:pl-12')}>
+                <p className="font-sans text-[11px] md:text-xs tracking-[0.24em] text-pure-black/55">{item.time}</p>
+                <p className="mt-2 font-serif text-xl md:text-3xl text-pure-black italic leading-[1.2]">{item.label}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
