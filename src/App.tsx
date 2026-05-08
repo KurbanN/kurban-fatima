@@ -26,7 +26,7 @@ interface RSVPFormData {
   comment: string;
 }
 
-/** Главный экран: `public/hero.png` (исходник `5083f8e5-0814-4aac-8877-4210005b193a.png` в корне можно удалить после деплоя) */
+/** Главный экран — фото из `public/hero.png` */
 const heroImage = `${import.meta.env.BASE_URL}hero.png`;
 const weddingMusic = new URL('../wedding-music.mp3', import.meta.url).href;
 const EVENT_TITLE = 'Свадьба Курбана и Фатимы';
@@ -312,7 +312,7 @@ export default function App() {
       {/* 1. Hero Section */}
       <section ref={heroRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-pure-black">
         {/* Parallax Background */}
-        <motion.div style={{ y, scale }} className="absolute inset-0 z-0 opacity-80 grayscale">
+        <motion.div style={{ y, scale }} className="absolute inset-0 z-0 opacity-80">
           <img 
             src={heroImage} 
             alt="Mansur & Fatima"
