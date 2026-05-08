@@ -26,13 +26,14 @@ interface RSVPFormData {
   comment: string;
 }
 
-const heroImage = new URL('../IMG_0188.JPG', import.meta.url).href;
+/** Главный экран: `public/hero.png` (исходник `5083f8e5-0814-4aac-8877-4210005b193a.png` в корне можно удалить после деплоя) */
+const heroImage = `${import.meta.env.BASE_URL}hero.png`;
 const weddingMusic = new URL('../wedding-music.mp3', import.meta.url).href;
 const EVENT_TITLE = 'Свадьба Курбана и Фатимы';
 const EVENT_LOCATION = 'Ресторан RIO, Тараз, Казахстан';
 const EVENT_START_UTC = new Date('2026-08-03T13:00:00Z'); // 18:00 in Taraz (UTC+5)
 const EVENT_END_UTC = new Date('2026-08-03T18:00:00Z');
-const detailsBgImage = new URL('../IMG_0190.JPG', import.meta.url).href;
+const detailsBgImage = `${import.meta.env.BASE_URL}IMG_0190.JPG`;
 const RSVP_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyemVx2SUmVdupBZI3jzWQwScbF3_Yfx7g4rga5DEyEuoJ6jUlheQCMvKaew-LgO7ii/exec';
 
 // --- Components ---
