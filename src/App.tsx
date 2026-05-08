@@ -328,7 +328,7 @@ export default function App() {
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="text-pure-white wedding-script normal-case text-3xl md:text-6xl font-light mb-4 md:mb-8 -translate-y-4 md:-translate-y-8"
           >
-            Weeding Day
+            Wedding Day
           </motion.div>
           
           <motion.div
